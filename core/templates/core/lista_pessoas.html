@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+
+{% block menu%}
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link " href="{% url 'core_home' %}">Home</a>
+    </li>
+    <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+            aria-expanded="false">Serviços</a>
+        <div class="dropdown-menu">
+            <a class="dropdown-item active" href="{% url 'core_lista_pessoas' %}">Pessoas</a>
+            <a class="dropdown-item" href="{% url 'core_lista_veiculos'%}">Veiculos</a>
+            <a class="dropdown-item" href="{% url 'core_lista_mov_rotativos' %}">Movimentos Rotativos</a>
+            <a class="dropdown-item" href="{% url 'core_lista_mov_mensalistas' %}">Movimentos Mensalistas</a>
+            <!-- <div class="dropdown-divider"></div> -->
+            <a class="dropdown-item" href="{% url 'core_lista_mensalistas' %}">Mensalistas</a>
+        </div>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="#">Logout</a>
+    </li>
+
+</ul>
+{%endblock%}
+
+{% block main %}
+<div class="row">
+    <div class="col-12">
+        <h1>Lista de Pessoas</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-6">
+        <form action="{% url 'core_pessoa_novo'%}" method="POST">
+            <!--naâo esquecer o csrf_token-->
+            {% csrf_token %}
+            {{ form | bootstrap }}
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </form>
+    </div>
+    <div class="col-sm-6">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Telefone</th>
+                    <th scope="col">Endereço</th>
+                </tr>
+            </thead>
+            <tbody>               
+                {% for pessoa in pessoas %}
+                <tr>
+                    <th scope="row"><a href="{% url 'core_pessoa_update' pessoa.id %}">{{pessoa.id}}</a></th>
+                    <td>{{pessoa.nome}}</td>
+                    <td>{{pessoa.telefone}}</td>
+                    <td>{{pessoa.endereco}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

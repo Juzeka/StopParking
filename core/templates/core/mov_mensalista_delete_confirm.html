@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% block main %}
+<div class="row">
+    <div class="col-12">
+        <H1>Deseja deletar o Movimento Mensalista: {{mov_mensalista}}</H1>
+    </div>
+</div>
+
+<form action="{% url 'core_mov_mensalista_delete' mov_mensalista.id %}" method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Deletar</button> 
+    <a href="{% url 'core_lista_mov_mensalistas' %}" class="btn btn-primary">Voltar</a>   
+</form>
+{% endblock %}

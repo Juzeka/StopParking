@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% block main %}
+<H1>Deseja apagar: {{pessoa}}</H1>
+
+<form action="{% url 'core_pessoa_delete' pessoa.id %}" method="POST">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Deletar</button>
+    <a href="{% url 'core_lista_pessoas' %}" class="btn btn-primary">Voltar</a>
+</form>
+
+{% endblock %}

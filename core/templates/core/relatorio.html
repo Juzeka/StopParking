@@ -1,0 +1,17 @@
+<table>
+    <tr>
+        <td>ID</td>
+        <td>Marca</td>
+        <td>Placa</td>
+        <td>Proprientario</td>
+    </tr>
+
+    {%for veiculo in veiculos %}
+        <tr>
+            <td>{{veiculo.id}}</td>
+            <td>{{veiculo.marca}}</td>
+            <td>{{veiculo.placa}}</td>
+            <td>{{veiculo.proprientario}}</td>
+        </tr>
+    {%endfor%}
+</table>
