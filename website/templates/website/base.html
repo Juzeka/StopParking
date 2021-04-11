@@ -1,24 +1,26 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css' %}">
-    <link rel="stylesheet"  type="text/css" href="{% static 'bootstrap/css/styler.css' %}">
-    <title>StopDiver Estacionamento</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'bootstrap/css/styler.css' %}">
+    <title>StopDiver</title>
 </head>
+
 <body>
+    <div class="container-fluid" style="width: 100%; height: 500px; background-size: cover; background-position: bottom; background-image: url({% static 'img/park.jpg' %});">
+        <nav class="navbar navbar-dark">
+            <a class="navbar-brand" href="" >
+                <img src="{% static 'img/car.png' %}" width="30" height="30" class="d-inline-block align-top"
+                alt="StopDrive Estacionamento">
+                StopDrive Estacionamento
+            </a>
+        </nav>
+    </div>
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-6">
-                <h1>StopDriver Estacionamento</h1>
-                <span>Slogan da empresa</span>
-            </div>
-            <div class="col-sm-6">
-                <img src="{% static 'img/car.png' %}" class="img-m" alt=" StopCar Estacionamento">
-            </div>
-        </div>
         {%block menu%}
         {%endblock%}
         {% block main %}
@@ -26,7 +28,12 @@
         {% include 'website/footer.html' %}
     </div>
 </body>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+</script>
+<script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+
 </html>

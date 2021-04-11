@@ -1,11 +1,10 @@
-.footer-website {
-    bottom: 0;
-    position: absolute;
+.image{
+    width: 150px !important;
 }
-.img-m{
-    height: 50px;
-    width: 150px;
+.tam{
+    width: 100%;
+    height: 650px;
 }
-.row-space{
-    margin-top: 25px;
+.nav-pills .nav-link.active{
+    background-color: #151b2e;
 }
