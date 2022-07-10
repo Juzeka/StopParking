@@ -31,6 +31,10 @@ INSTALLED_APPS += [
 
 INSTALLED_APPS += [
     'core',
+    'mov_mensalistas',
+    'mov_rotativos',
+    'mensalistas',
+    'veiculos',
     'website',
 ]
 

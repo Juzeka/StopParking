@@ -1,8 +1,9 @@
+from django import forms
 from django.forms import ModelForm
 from .models import *
 
 
-class PessoaForm(ModelForm):
+class MensalistaForm(ModelForm):
     class Meta:
-        model= Pessoa
+        model= Mensalista
         fields = '__all__'
