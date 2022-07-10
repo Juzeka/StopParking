@@ -35,7 +35,32 @@
     <div class="col-sm-6">
         <form action="{% url 'core_mov_rotativo_novo'%}" method="POST">
             {% csrf_token %}
-            {{ form | bootstrap }}
+            <div class="form-group">
+                <label class="control-label  " for="id_checkin">Checkin</label>
+                {{ form.checkin }}
+            </div>
+            <div class="form-group">
+                <label class="control-label  " for="id_checkout">Checkout</label>
+                {{ form.checkout }}
+            </div>
+            <div class="form-group">
+                <label class="control-label  " for="id_valor_hora">Valor hora</label>
+                {{ form.valor_hora }}
+            </div>
+            <div class="form-group">
+                <label class="control-label  " for="id_veiculo">Veiculo</label>
+                {{ form.veiculo }}
+            </div>
+            <div class="form-group">
+                <div class="">
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="pago" id="id_pago"> <span>Pago</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
             <button type="submit" class="btn btn-primary">Cadastrar</button>
         </form>
     </div>

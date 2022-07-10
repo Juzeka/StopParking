@@ -22,8 +22,6 @@ from .views import (
     mov_rotativo_delete,
     mensalista_delete,
     mov_mensalista_delete,
- 
-
 )
 
 urlpatterns = [

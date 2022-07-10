@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 from dj_database_url import parse as dburl
 from decouple import config
+import django_on_heroku
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -11,12 +12,10 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 
-ALLOWED_HOSTS = ['stopparking.herokuapp.com']
-#ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -24,10 +23,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+]
 
+INSTALLED_APPS += [
     'bootstrapform',
-    'core.apps.CoreConfig',
-    'website.apps.WebsiteConfig',
+]
+
+INSTALLED_APPS += [
+    'core',
+    'website',
 ]
 
 MIDDLEWARE = [
@@ -65,8 +69,9 @@ WSGI_APPLICATION = 'estacionamento.wsgi.application'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 default_dburl = 'sqlite:///' + os.path.join(BASE_DIR, 'db.sqlite3')
+
 DATABASES = {
- 'default': config('DATABASE_URL', default=default_dburl, cast=dburl),
+    'default': config('DATABASE_URL', default=default_dburl, cast=dburl),
 }
 
 
@@ -123,3 +128,5 @@ STATICFILES_DIRS = [
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL ='core_home'
 LOGOUT_REDIRECT_URL ='core_home'
+
+django_on_heroku.settings(locals())
