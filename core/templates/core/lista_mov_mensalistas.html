@@ -45,8 +45,8 @@
                 <tr>
                     <th scope="col">ID</th>
                     <th scope="col">Mensalista</th>
-                    <th scope="col">Data de Pagamento</th>
-                    <th scope="col">Total</th>
+                    <th scope="col">Data de pagamento</th>
+                    <th scope="col">Valor pago</th>
                 </tr>
             </thead>
             <tbody>
@@ -54,8 +54,8 @@
                 <tr>
                     <th scope="row"><a href="{% url 'core_mov_mensalista_update' mov_mensalista.id %}">{{mov_mensalista.id}}</a></th>
                     <td>{{mov_mensalista.mensalista}}</td>
-                    <td>{{mov_mensalista.dt_pgto}}</td>
-                    <td>{{mov_mensalista.total}}</td>                    
+                    <td>{{mov_mensalista.pago_em}}</td>
+                    <td>{{mov_mensalista.valor_pago}}</td>                    
                 </tr>
                 {% endfor %}
             </tbody>

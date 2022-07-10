@@ -5,6 +5,6 @@ from .models import (
 
 
 class MovMensalistaAdmin(admin.ModelAdmin):
-    list_display= ('mensalista', 'dt_pgto', 'total')
+    list_display= ('mensalista', 'pago_em', 'valor_pago')
 
 admin.site.register(MovMensalista,MovMensalistaAdmin)

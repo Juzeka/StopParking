@@ -2,7 +2,12 @@ from django.db import models
 
 
 class Mensalista(models.Model):
-    veiculo = models.ForeignKey('veiculos.Veiculo', on_delete=models.CASCADE)
+    veiculo = models.ForeignKey(
+        'veiculos.Veiculo',
+        on_delete=models.CASCADE,
+        related_name='veiculo_mensalista',
+        verbose_name='Veiculo'
+    )
     inicio = models.DateField()
     valor_mes = models.DecimalField(max_digits=6, decimal_places=2)
 
