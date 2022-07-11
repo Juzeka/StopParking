@@ -7,3 +7,9 @@ class VeiculoForm(ModelForm):
     class Meta:
         model= Veiculo
         fields = '__all__'
+
+
+class MarcaForm(ModelForm):
+    class Meta:
+        model= Marca
+        fields = '__all__'

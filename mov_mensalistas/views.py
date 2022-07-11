@@ -13,7 +13,7 @@ def lista_mov_mensalistas(request):
         'form': form
     }
 
-    return render(request,'core/lista_mov_mensalistas.html',data)
+    return render(request,'core/lista_mov_mensalistas.html', data)
 
 @login_required()
 def mov_mensalista_novo(request):

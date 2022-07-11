@@ -26,6 +26,8 @@
 {%endblock%}
 
 {% block main %}
+{% include 'mov_mensalistas/modal_mov_mensalista_form.html' %}
+
 <div class="row">
     <div class="col-12">
         <h1>Lista de Movimentos Mensalistas</h1>
@@ -38,6 +40,9 @@
             {{ form | bootstrap }}
             <button type="submit" class="btn btn-primary">Cadastar</button>
         </form>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#new_mov_mensalista">
+            Nova pessoa
+        </button>
     </div>
     <div class="col-sm-6">
         <table class="table table-striped">

@@ -1,16 +1,19 @@
 from django.shortcuts import render, redirect
-from .models import Veiculo
-from .forms import VeiculoForm
+from .models import Veiculo, Marca
+from .forms import VeiculoForm, MarcaForm
 from django.contrib.auth.decorators import login_required
+from utils.views import CreateView
 
 
 @login_required()
 def lista_veiculos(request):
     veiculos = Veiculo.objects.all()
     form = VeiculoForm()
+    form_marca = MarcaForm()
     data = {
         'veiculos': veiculos,
-        'form': form
+        'form_veiculo': form,
+        'form_marca': form_marca
     }
     return render(request, 'core/lista_veiculos.html',data)
 
@@ -52,3 +55,9 @@ def veiculo_delete(request, id):
             'core/veiculo_delete_confirm.html',
             {'veiculo': veiculo}
         )
+
+
+class MarcaCreateView(CreateView):
+    model = Marca
+    form_class = MarcaForm
+    success_url = '/admin_system/veiculo/'

@@ -1,0 +1,23 @@
+{% load bootstrap %}
+
+<div class="modal fade" id="new_mov_mensalista" tabindex="-1" role="dialog" aria-labelledby="new_mov_mensalistaTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Novo movimento mensalista</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{% url 'core_mov_mensalista_novo' %}" method="POST">
+                <div class="modal-body">
+                    {% csrf_token %}
+                    {{ form|bootstrap }}
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -26,22 +26,21 @@
 {%endblock%}
 
 {% block main %}
+{% include 'core/modal_pessoa_form.html' %}
+
 <div class="row">
     <div class="col-12">
-        <h1>Lista de Pessoas</h1>
+        <h1>Área de pessoas</h1>
     </div>
 </div>
 
 <div class="row">
     <div class="col-sm-6">
-        <form action="{% url 'core_pessoa_novo'%}" method="POST">
-            <!--naâo esquecer o csrf_token-->
-            {% csrf_token %}
-            {{ form | bootstrap }}
-            <button type="submit" class="btn btn-primary">Cadastrar</button>
-        </form>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#new_pessoa">
+            Nova pessoa
+        </button>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-12 mt-2">
         <table class="table table-striped">
             <thead>
                 <tr>
