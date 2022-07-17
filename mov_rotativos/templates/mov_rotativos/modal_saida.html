@@ -1,0 +1,22 @@
+<div class="modal fade" id="veiculo{{rotativo.pk}}" tabindex="-1" role="dialog" aria-labelledby="veiculo{{rotativo.pk}}Title" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Saída</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{% url 'checkout' rotativo.pk%}" method="POST">
+                <div class="modal-body">
+                    {% csrf_token %}
+                    <div class="form-inline justify-content-center">
+                        <label>Valor a pagar</label>
+                        <input type="text" name="valor_pago" class="form-control mr-2 ml-2" value="" readonly required id="id_valor_pago">
+                        <button type="submit" class="btn btn-info">Registar saída</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
