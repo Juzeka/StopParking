@@ -36,6 +36,7 @@ INSTALLED_APPS += [
     'mensalistas',
     'veiculos',
     'website',
+    'configuracoes',
 ]
 
 MIDDLEWARE = [

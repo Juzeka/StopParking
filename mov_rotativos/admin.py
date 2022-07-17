@@ -6,8 +6,7 @@ from .models import (
 
 class MovRotativoAdmin(admin.ModelAdmin):
     list_display= (
-        'checkin','checkout','valor_hora',
-        'veiculo','pago','horas_total'
+        'placa', 'checkin', 'checkout','valor_pago', 'pago'
     )
 
 admin.site.register(MovRotativo, MovRotativoAdmin)

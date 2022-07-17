@@ -13,31 +13,26 @@ class MovRotativo(models.Model):
         blank=True,
         verbose_name='Checkout'
     )
-    valor_hora = models.DecimalField(
+    placa = models.CharField(
+        max_length=8,
+        blank=False,
+        null=False,
+        verbose_name='Placa do veículo'
+    )
+    valor_pago = models.DecimalField(
         max_digits=5,
         decimal_places=2,
-        verbose_name='Valor por hora'
-    )
-    veiculo = models.ForeignKey(
-        'veiculos.Veiculo',
-        on_delete=models.CASCADE,
-        related_name='mov_rotativo_veiculo',
-        verbose_name='Valor por hora'
+        blank=True,
+        null=True,
+        verbose_name='Valor pago'
     )
     pago = models.BooleanField(default=False)
 
-    def horas_total(self):
-        try:
-            return math.ceil(
-                (self.checkout-self.checkin).total_seconds() / 3600
-            )
-        except:
-            pass
-    def total(self):
-        try:
-            return self.valor_hora * self.horas_total()
-        except:
-            pass
+
+    class Meta:
+        ordering = ['-pk']
+        verbose_name = 'Rotativo'
+        verbose_name_plural = 'Rotativos'
 
     def __str__(self):
-        return str(self.veiculo)
+        return str(self.placa)

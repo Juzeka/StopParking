@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect
 from .models import Pessoa
 from .forms import PessoaForm
+from mov_rotativos.models import MovRotativo
 from django.contrib.auth.decorators import login_required
 
 
 @login_required()
 def home(request):
-    return render(request, 'core/index.html')
+    rotativos = MovRotativo.objects.all()
+    return render(request, 'core/index.html', {'rotativos': rotativos})
 
 @login_required()
 def lista_pessoas(request):

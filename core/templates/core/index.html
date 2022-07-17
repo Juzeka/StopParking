@@ -1,33 +1,146 @@
 {% extends 'base.html' %}
 
 {% block menu%}
-<ul class="nav nav-tabs">
-    <li class="nav-item">
-        <a class="nav-link active" href="{% url 'core_home' %}">Home</a>
-    </li>
-    <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-            aria-expanded="false">Serviços</a>
-        <div class="dropdown-menu">
-            <a class="dropdown-item" href="{% url 'core_lista_pessoas' %}">Pessoas</a>
-            <a class="dropdown-item" href="{% url 'core_lista_veiculos'%}">Veiculos</a>
-            <a class="dropdown-item" href="{% url 'core_lista_mov_rotativos' %}">Movimentos Rotativos</a>
-            <!-- <div class="dropdown-divider"></div> -->
-            <a class="dropdown-item" href="{% url 'core_lista_mensalistas' %}">Mensalistas</a>
-        </div>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" href="#">Logout</a>
-    </li>
-    
-</ul>
+<div class="container">
+
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" href="{% url 'core_home' %}">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                aria-expanded="false">Serviços</a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="{% url 'core_lista_pessoas' %}">Pessoas</a>
+                <a class="dropdown-item" href="{% url 'core_lista_veiculos'%}">Veiculos</a>
+                <a class="dropdown-item" href="{% url 'core_lista_mov_rotativos' %}">Movimentos Rotativos</a>
+                <!-- <div class="dropdown-divider"></div> -->
+                <a class="dropdown-item" href="{% url 'core_lista_mensalistas' %}">Mensalistas</a>
+            </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Logout</a>
+        </li>
+        
+    </ul>
 {%endblock%}
 
 {% block main %}
-<div class="row">
-    <div class="col">
-        <h1>Seja Bem vindo ao sistema da Stop Estacionamento</h1>
-        <a href="/admin/">Login in</a>
+    <div class="row">
+        <div class="col-12">
+            <h1>Seja Bem vindo ao sistema da Stop Estacionamento</h1>
+            <!-- <a href="/admin/">Login in</a> -->
+        </div>
+        <div class="col-12">
+            <div class="row justify-content-between">
+
+                <h3 class="col-auto">Registros</h3>
+                <a class="col-auto btn btn-info btn-lg" data-toggle="modal" data-target="#new_entrada">Nova entrada</a>
+        
+            </div>
+            <!-- <h3>Registros <a class="btn btn-info" data-toggle="modal" data-target="#new_entrada">Nova entrada</a></h3> -->
+        </div>
+
+        <div class="col-12 mt-1 text-center align-self-center">
+            
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Placa</th>
+                        <th>Entrada</th>
+                        <th>Saída</th>
+                        <th>Valor pago</th>
+                        <th>Status</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for rotativo in rotativos %}
+                    <tr>
+                        <td>{{ rotativo.placa }}</td>
+                        <td>
+                            {{ rotativo.checkin |date:'H:i:s' }} 
+                        </td>
+                        {% if rotativo.pago %}
+                            <td>{{ rotativo.checkout|date:'H:i:s' }}</td>
+                            <td>{{ rotativo.valor_pago }}</td>
+                            <td>Pago</td>
+                            <td></td>
+                        {% else %}
+                            <td>---</td>
+                            <td>---</td>
+                            <td>Aberto</td>
+                            <td>
+                                <a class="btn btn-outline-warning" data-toggle="modal" data-target="#veiculo{{rotativo.pk}}">Saída</a>
+                            </td>
+                        {% endif %}
+                    </tr>
+                    <div class="modal fade" id="veiculo{{rotativo.pk}}" tabindex="-1" role="dialog" aria-labelledby="veiculo{{rotativo.pk}}Title" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Saída</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form action="{% url 'checkout' rotativo.pk%}" method="POST">
+                                    <div class="modal-body">
+                                        {% csrf_token %}
+                                        <div class="form-inline justify-content-center">
+                                            <label>Valor a pagar</label>
+                                            <input type="text" name="valor_pago" class="form-control mr-2 ml-2" value="" readonly required id="id_valor_pago">
+                                            <button type="submit" class="btn btn-info">Registar saída</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        {% load bootstrap %}
+
+        <div class="modal fade" id="new_entrada" tabindex="-1" role="dialog" aria-labelledby="new_entradaTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Entrada</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <form action="{% url 'checkin' %}" method="POST">
+                        <div class="modal-body">
+                            {% csrf_token %}
+                            <div class="form-inline justify-content-center">
+                                <label>Placa</label>
+                                <input type="text" name="placa" class="form-control mr-2 ml-2" maxlength="8" required id="id_placa">
+                                <button type="submit" class="btn btn-success">Registar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+
+<script type="text/javascript">
+
+</script>
 {% endblock  %}

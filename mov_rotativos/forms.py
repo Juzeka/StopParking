@@ -9,8 +9,24 @@ class MovRotativoForm(ModelForm):
         fields = '__all__'
 
         widgets = {
-            'veiculo': forms.Select(attrs={'class':'form-control'}),
             'checkin': forms.DateTimeInput(attrs={'class':'form-control', 'type':'datetime-local'}),
             'checkout': forms.DateTimeInput(attrs={'class':'form-control', 'type':'datetime-local'}),
             'valor_hora': forms.NumberInput(attrs={'class':'form-control', 'step':'0.01'}),
         }
+
+
+
+class MovRotativoChekinForm(ModelForm):
+    class Meta:
+        model= MovRotativo
+        fields = ('placa', 'checkin')
+
+        widgets = {
+            'placa': forms.TextInput(attrs={'class':'form-control'}),
+        }
+
+
+class MovRotativoChekoutForm(ModelForm):
+    class Meta:
+        model= MovRotativo
+        fields = ('checkout', 'valor_pago', 'pago')

@@ -4,6 +4,9 @@ from .views import (
     mov_rotativo_novo,
     mov_rotativo_update,
     mov_rotativo_delete,
+    checkin,
+    checkout,
+    calcular_valor_apagar
 )
 
 
@@ -12,4 +15,7 @@ urlpatterns = [
     path('novo', mov_rotativo_novo, name='core_mov_rotativo_novo'),
     path('update/<int:id>', mov_rotativo_update, name='core_mov_rotativo_update'),
     path('delete/<int:id>', mov_rotativo_delete, name='core_mov_rotativo_delete'),
+    path('checkin', checkin, name='checkin'),
+    path('checkout/<int:id>', checkout, name='checkout'),
+    path('calcular/<int:id>', calcular_valor_apagar, name='calcular'),
 ]
