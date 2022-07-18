@@ -1,100 +1,80 @@
 {% extends 'base.html' %}
 
 {% block menu%}
-<div class="container">
-
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-            <a class="nav-link active" href="{% url 'core_home' %}">Home</a>
-        </li>
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
-                aria-expanded="false">Serviços</a>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="{% url 'core_lista_pessoas' %}">Pessoas</a>
-                <a class="dropdown-item" href="{% url 'core_lista_veiculos'%}">Veiculos</a>
-                <a class="dropdown-item" href="{% url 'core_lista_mov_rotativos' %}">Movimentos Rotativos</a>
-                <!-- <div class="dropdown-divider"></div> -->
-                <a class="dropdown-item" href="{% url 'core_lista_mensalistas' %}">Mensalistas</a>
-            </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">Logout</a>
-        </li>
-        
-    </ul>
+<section class="container_fluid">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="{% url 'core_home' %}">Home</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-item nav-link" href="{% url 'core_lista_pessoas' %}">Pessoas</a>
-                <a class="nav-item nav-link" href="{% url 'core_lista_veiculos'%}">Veiculos</a>
-                <a class="nav-item nav-link" href="{% url 'core_lista_mov_rotativos' %}">Rotativos</a>
-                <a class="nav-item nav-link" href="{% url 'core_lista_mensalistas' %}">Mensalista</a>
+        <div class="container">
+            <a class="navbar-brand" href="{% url 'core_home' %}">StopCar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="menu">
+                <div class="navbar-nav mr-auto">
+                    <a class="nav-item nav-link" href="{% url 'core_lista_mov_rotativos' %}">Rotativos</a>
+                </div>
+                <a class="nav-item nav-link" href="{% url 'core_lista_mensalistas' %}">Sair</a>
             </div>
         </div>
     </nav>
+</section>
 {%endblock%}
 
 {% block main %}
+<section class="container mt-2">
+
     {% include 'mov_rotativos/modal_entrada.html' %}
     <div class="row">
         <div class="col-12">
-            <h1>Seja Bem vindo ao sistema da Stop Estacionamento</h1>
-        </div>
-        <div class="col-12">
             <div class="row justify-content-between">
-
-                <h3 class="col-auto">Registros</h3>
+                <h3 class="col-auto">Data: {{ hoje|date:'d/m/y' }} </h3>
                 <a class="col-auto btn btn-info btn-lg" data-toggle="modal" data-target="#new_entrada">Nova entrada</a>
-        
             </div>
         </div>
 
         <div class="col-12 mt-1 text-center align-self-center">
-            
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>Placa</th>
-                        <th>Entrada</th>
-                        <th>Saída</th>
-                        <th>Valor pago</th>
-                        <th>Status</th>
-                        <th></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for rotativo in rotativos %}
-                    <tr>
-                        <td>{{ rotativo.placa }}</td>
-                        <td>
-                            {{ rotativo.checkin |date:'H:i:s' }} 
-                        </td>
-                        {% if rotativo.pago %}
-                            <td>{{ rotativo.checkout|date:'H:i:s' }}</td>
-                            <td>{{ rotativo.valor_pago }}</td>
-                            <td>Pago</td>
-                            <td></td>
-                        {% else %}
-                            <td>---</td>
-                            <td>---</td>
-                            <td>Aberto</td>
+            {% if rotativos %}
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Placa</th>
+                            <th>Entrada</th>
+                            <th>Saída</th>
+                            <th>Valor pago</th>
+                            <th>Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for rotativo in rotativos %}
+                        <tr>
+                            <td>{{ rotativo.placa }}</td>
                             <td>
-                                <a class="btn btn-outline-warning" data-toggle="modal" data-target="#veiculo{{rotativo.pk}}">Saída</a>
+                                {{ rotativo.checkin |date:'H:i:s' }} 
                             </td>
-                        {% endif %}
-                    </tr>
-                        {% include 'mov_rotativos/modal_saida.html' %}
-                    {% endfor %}
-                </tbody>
-            </table>
+                            {% if rotativo.pago %}
+                                <td>{{ rotativo.checkout|date:'H:i:s' }}</td>
+                                <td>{{ rotativo.valor_pago }}</td>
+                                <td>Pago</td>
+                                <td></td>
+                            {% else %}
+                                <td>---</td>
+                                <td>---</td>
+                                <td>Aberto</td>
+                                <td>
+                                    <a class="btn btn-outline-warning" data-toggle="modal" data-target="#veiculo{{rotativo.pk}}">Saída</a>
+                                </td>
+                            {% endif %}
+                        </tr>
+                            {% include 'mov_rotativos/modal_saida.html' %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                    <h4>Não há registros de entradas</h4>
+            {% endif %}
         </div>
     </div>
-</div>
+</section>
 
 <script type="text/javascript">
 

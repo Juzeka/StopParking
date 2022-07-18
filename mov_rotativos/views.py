@@ -1,11 +1,10 @@
 from django.shortcuts import render, redirect
 from .models import MovRotativo
-from .forms import MovRotativoForm, MovRotativoChekinForm, MovRotativoChekoutForm
+from .forms import MovRotativoForm, MovRotativoChekinForm
 from django.contrib.auth.decorators import login_required
 from utils.views import CreateView
 from django.utils import timezone
 from configuracoes.models import Configuracao
-import math
 from decimal import Decimal
 
 

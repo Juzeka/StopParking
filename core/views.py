@@ -2,13 +2,21 @@ from django.shortcuts import render, redirect
 from .models import Pessoa
 from .forms import PessoaForm
 from mov_rotativos.models import MovRotativo
+from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 
 
 @login_required()
 def home(request):
-    rotativos = MovRotativo.objects.all()
-    return render(request, 'core/index.html', {'rotativos': rotativos})
+    date_now = timezone.now()
+    rotativos = MovRotativo.objects.filter(checkin__icontains=date_now.date())
+
+    data = {
+        'rotativos': rotativos,
+        'hoje': date_now
+    }
+
+    return render(request, 'core/index.html', data)
 
 @login_required()
 def lista_pessoas(request):
