@@ -65,7 +65,7 @@ class CheckinView(CreateView):
     template_name = 'core/index.html'
     model = MovRotativo
     form_class = MovRotativoChekinForm
-    success_url = '/admin_system/'
+    success_url = '/'
 
     def form_valid(self, form):
         return super().form_valid(form)

@@ -1,17 +1,37 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/styler.css' %}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>StopCar</title>
 </head>
 
 <body>
-    <div class="">
+    <div>
         {% block menu %}
+            <section class="container_fluid bg-header">
+                <nav class="navbar navbar-expand-lg navbar-light ">
+                    <div class="container color-font">
+                        <a class="navbar-brand" href="{% url 'core_home' %}">StopCar</a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="menu">
+                            <div class="navbar-nav mr-auto">
+                                <a class="nav-item nav-link" href="{% url 'core_lista_mov_rotativos' %}">Rotativos</a>
+                            </div>
+                            <a class="nav-item nav-link" href="/admin/">Painel administrativo</a>
+                            <a class="nav-item nav-link" href="{% url 'core_lista_mensalistas' %}">Sair</a>
+                        </div>
+                    </div>
+                </nav>
+            </section>
         {% endblock %}
 
         {% block main %}

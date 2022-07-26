@@ -60,4 +60,4 @@ def veiculo_delete(request, id):
 class MarcaCreateView(CreateView):
     model = Marca
     form_class = MarcaForm
-    success_url = '/admin_system/veiculo/'
+    success_url = '/veiculo/'

@@ -27,6 +27,7 @@ INSTALLED_APPS = [
 
 INSTALLED_APPS += [
     'bootstrapform',
+    'fontawesomefree',
 ]
 
 INSTALLED_APPS += [
@@ -35,7 +36,6 @@ INSTALLED_APPS += [
     'mov_rotativos',
     'mensalistas',
     'veiculos',
-    'website',
     'configuracoes',
 ]
 
