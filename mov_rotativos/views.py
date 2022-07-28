@@ -73,6 +73,7 @@ class CheckinView(CreateView):
 @login_required()
 def checkin(request):
     data = request.POST.copy()
+    data['placa'] = data.get('placa').upper()
     data['checkin'] = timezone.now()
 
     form = MovRotativoChekinForm(data or None)
